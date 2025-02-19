@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Charity Run",
+    "category": "Fundraiser",
+    "date": "2025-03-10",
+    "time": "8:00 AM",
+    "image": "/img/event-1.png",
+    "description": "Join our charity run to raise funds for local shelters."
+  },
+  {
+    "title": "Coding Workshop",
+    "category": "Workshop",
+    "date": "2025-03-15",
+    "time": "10:00 AM",
+    "image": "/img/event-1.png",
+    "description": "Learn web development skills in this hands-on workshop."
+  },
+  {
+    "title": "Park Cleanup",
+    "category": "Cleanup",
+    "date": "2025-03-20",
+    "time": "9:00 AM",
+    "image": "/img/event-1.png",
+    "description": "Help clean up the park and make it a better place for everyone."
+  }
+]
