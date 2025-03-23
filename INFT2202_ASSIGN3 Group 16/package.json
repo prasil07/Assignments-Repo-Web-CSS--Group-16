@@ -1,0 +1,19 @@
+{
+  "name": "inft2202_ass2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "live-server --entry-file=index.html",
+    "build": "tsc scripts/*.ts --watch --outFile main.js -m es2022"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "d3": "^7.9.0",
+    "jquery": "^3.7.1",
+    "popper.js": "^1.16.1",
+    "typescript": "^5.8.2"
+  }
+}

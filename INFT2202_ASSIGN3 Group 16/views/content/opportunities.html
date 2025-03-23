@@ -1,0 +1,37 @@
+<h1 class="text-center mb-4">Volunteer Opportunities</h1>
+<div id="opportunities" class="row g-4">
+  <!-- Opportunities will be dynamically loaded here -->
+</div>
+<!-- Modal for Sign-Up Form -->
+<div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="signUpModalLabel">Volunteer Sign-Up</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="signUpForm">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" name="name" id="name" required />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" name="email" id="email" required />
+          </div>
+          <div class="mb-3">
+            <label for="role" class="form-label">Preferred Role</label>
+            <select class="form-select" name="role" id="role" required>
+              <option value="">Select a role</option>
+              <option value="Organizer">Organizer</option>
+              <option value="Volunteer">Volunteer</option>
+              <option value="Sponsor">Sponsor</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
