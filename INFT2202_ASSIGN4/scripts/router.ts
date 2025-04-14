@@ -1,7 +1,7 @@
 /**
  * Student Name: Siraj Baral
  * Student ID: 100851233
- * Date of Completion: 10/03/2025
+ * Date of Completion: 11/04/2025
  */
 const contentKeys = {
     '/': 'home.html',
@@ -27,9 +27,12 @@ class Router {
     }
 
     navigate(url: string) {
-        const path = url.startsWith('/') ? url : new URL(url).pathname
-        history.pushState({}, "", url);
-        this.loadRoute(path);
+        try {
+            const path = url.startsWith('/') ? url : new URL(url).pathname
+            history.pushState({}, "", url);
+            this.loadRoute(path);
+        } catch (error) {
+        }
     }
 
     private async loadRoute(path: string) {
@@ -38,10 +41,12 @@ class Router {
             if (mainContainer) {
                 try {
                     const key = contentKeys[path]
+                    if (!key) throw '';
                     const res = await fetch('/views/content/' + key)
                     const html = await res.text()
                     mainContainer.innerHTML = html
                 } catch (error) {
+                    this.navigate('/');
                 }
             }
             this.routes[path]();

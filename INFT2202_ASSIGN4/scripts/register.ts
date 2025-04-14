@@ -1,7 +1,7 @@
 /**
  * Student Name: Siraj Baral
  * Student ID: 100851233
- * Date of Completion: 10/03/2025
+ * Date of Completion: 11/04/2025
  */
 const RegisterPage = () => {
   const form = document.getElementById("registerForm") as HTMLFormElement;
@@ -18,7 +18,7 @@ const RegisterPage = () => {
     const password = form.password.value;
 
     try {
-      const response = await fetch(SERVER_URL + "/api/auth/register", {
+      const response = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ fullname, email, password }),
@@ -29,7 +29,7 @@ const RegisterPage = () => {
 
       if (response.ok) {
         alert("Registration successful! You can now log in.");
-        window.location.href = "/login";
+        window.router.navigate("/login");
       } else {
         alert(data.message || "Registration failed.");
       }

@@ -1,7 +1,7 @@
 /**
  * Student Name: Siraj Baral
  * Student ID: 100851233
- * Date of Completion: 10/03/2025
+ * Date of Completion: 11/04/2025
  */
 const ContactPage = () => {
   /**
@@ -23,7 +23,7 @@ const ContactPage = () => {
 
     // Redirect to the home page after 5 seconds
     setTimeout(() => {
-      window.location.href = "/";
+      window.router.navigate('/');
     }, 5000);
   });
 }

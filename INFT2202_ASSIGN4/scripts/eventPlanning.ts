@@ -1,7 +1,7 @@
 /**
  * Student Name: Siraj Baral
  * Student ID: 100851233
- * Date of Completion: 10/03/2025
+ * Date of Completion: 11/04/2025
  */
 const EventPlanningPage = () => {
   const form = document.getElementById("eventForm") as HTMLFormElement;
@@ -9,7 +9,7 @@ const EventPlanningPage = () => {
   const submitBtn = document.getElementById("submitBtn") as HTMLButtonElement;
 
   async function fetchEvents() {
-    const res = await fetch(SERVER_URL + "/api/events", { credentials: "include" });
+    const res = await fetch("/api/events", { credentials: "include" });
     const events = await res.json();
     renderEvents(events);
   }
@@ -51,7 +51,7 @@ const EventPlanningPage = () => {
     const method = id ? "PUT" : "POST";
     const url = id ? `/api/events/${id}` : "/api/events";
 
-    const res = await fetch(SERVER_URL + url, {
+    const res = await fetch(url, {
       method,
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -65,7 +65,13 @@ const EventPlanningPage = () => {
       submitBtn.innerText = "Add Event";
       fetchEvents();
     } else {
-      alert("Error saving event.");
+      let msg = "Error saving event."
+      try {
+        const data = await res.json();
+        msg = data.message || data.error || msg;
+      } catch (er) {
+      }
+      alert(msg);
     }
   });
 
@@ -76,7 +82,7 @@ const EventPlanningPage = () => {
     const eventId = card?.getAttribute("data-id");
 
     if ((target as HTMLElement).classList.contains("edit-btn")) {
-      const res = await fetch(SERVER_URL + `/api/events/${eventId}`, {
+      const res = await fetch(`/api/events/${eventId}`, {
         credentials: "include"
       });
       const event = await res.json();
@@ -88,11 +94,12 @@ const EventPlanningPage = () => {
       form.category.value = event.category;
       form.image.value = event.image || "";
       submitBtn.innerText = "Update Event";
+      form.scrollIntoView();
     }
 
     if ((target as HTMLElement).classList.contains("delete-btn")) {
       if (confirm("Delete this event?")) {
-        const res = await fetch(SERVER_URL + `/api/events/${eventId}`, {
+        const res = await fetch(`/api/events/${eventId}`, {
           method: "DELETE",
           credentials: "include"
         });

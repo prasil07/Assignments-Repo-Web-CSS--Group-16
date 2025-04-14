@@ -1,7 +1,7 @@
 /**
  * Student Name: Siraj Baral
  * Student ID: 100851233
- * Date of Completion: 10/03/2025
+ * Date of Completion: 11/04/2025
  */
 const GalleryPage = () => {
     const galleryContainer = document.getElementById('gallery')

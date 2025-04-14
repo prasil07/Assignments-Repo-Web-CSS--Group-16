@@ -46,7 +46,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 /**
  * Student Name: Siraj Baral
  * Student ID: 100851233
- * Date of Completion: 10/03/2025
+ * Date of Completion: 11/04/2025
  */
 var ContactPage = function () {
     var _a;
@@ -66,7 +66,7 @@ var ContactPage = function () {
             event.currentTarget.reset();
         // Redirect to the home page after 5 seconds
         setTimeout(function () {
-            window.location.href = "/";
+            window.router.navigate('/');
         }, 5000);
     });
 };
@@ -74,7 +74,7 @@ var _this = this;
 /**
  * Student Name: Siraj Baral
  * Student ID: 100851233
- * Date of Completion: 10/03/2025
+ * Date of Completion: 11/04/2025
  */
 var EventPlanningPage = function () {
     var form = document.getElementById("eventForm");
@@ -85,7 +85,7 @@ var EventPlanningPage = function () {
             var res, events;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, fetch(SERVER_URL + "/api/events", { credentials: "include" })];
+                    case 0: return [4 /*yield*/, fetch("/api/events", { credentials: "include" })];
                     case 1:
                         res = _a.sent();
                         return [4 /*yield*/, res.json()];
@@ -107,7 +107,7 @@ var EventPlanningPage = function () {
         });
     }
     form.addEventListener("submit", function (e) { return __awaiter(_this, void 0, void 0, function () {
-        var data, id, method, url, res;
+        var data, id, method, url, res, msg, data_1, er_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -123,7 +123,7 @@ var EventPlanningPage = function () {
                     id = form.eventId.value;
                     method = id ? "PUT" : "POST";
                     url = id ? "/api/events/".concat(id) : "/api/events";
-                    return [4 /*yield*/, fetch(SERVER_URL + url, {
+                    return [4 /*yield*/, fetch(url, {
                             method: method,
                             headers: { "Content-Type": "application/json" },
                             credentials: "include",
@@ -131,17 +131,30 @@ var EventPlanningPage = function () {
                         })];
                 case 1:
                     res = _a.sent();
-                    if (res.ok) {
-                        alert(id ? "Event updated!" : "Event created!");
-                        form.reset();
-                        form.eventId.value = "";
-                        submitBtn.innerText = "Add Event";
-                        fetchEvents();
-                    }
-                    else {
-                        alert("Error saving event.");
-                    }
-                    return [2 /*return*/];
+                    if (!res.ok) return [3 /*break*/, 2];
+                    alert(id ? "Event updated!" : "Event created!");
+                    form.reset();
+                    form.eventId.value = "";
+                    submitBtn.innerText = "Add Event";
+                    fetchEvents();
+                    return [3 /*break*/, 7];
+                case 2:
+                    msg = "Error saving event.";
+                    _a.label = 3;
+                case 3:
+                    _a.trys.push([3, 5, , 6]);
+                    return [4 /*yield*/, res.json()];
+                case 4:
+                    data_1 = _a.sent();
+                    msg = data_1.message || data_1.error || msg;
+                    return [3 /*break*/, 6];
+                case 5:
+                    er_1 = _a.sent();
+                    return [3 /*break*/, 6];
+                case 6:
+                    alert(msg);
+                    _a.label = 7;
+                case 7: return [2 /*return*/];
             }
         });
     }); });
@@ -155,7 +168,7 @@ var EventPlanningPage = function () {
                     card = target.closest(".card");
                     eventId = card === null || card === void 0 ? void 0 : card.getAttribute("data-id");
                     if (!target.classList.contains("edit-btn")) return [3 /*break*/, 3];
-                    return [4 /*yield*/, fetch(SERVER_URL + "/api/events/".concat(eventId), {
+                    return [4 /*yield*/, fetch("/api/events/".concat(eventId), {
                             credentials: "include"
                         })];
                 case 1:
@@ -171,11 +184,12 @@ var EventPlanningPage = function () {
                     form.category.value = event_1.category;
                     form.image.value = event_1.image || "";
                     submitBtn.innerText = "Update Event";
+                    form.scrollIntoView();
                     _a.label = 3;
                 case 3:
                     if (!target.classList.contains("delete-btn")) return [3 /*break*/, 5];
                     if (!confirm("Delete this event?")) return [3 /*break*/, 5];
-                    return [4 /*yield*/, fetch(SERVER_URL + "/api/events/".concat(eventId), {
+                    return [4 /*yield*/, fetch("/api/events/".concat(eventId), {
                             method: "DELETE",
                             credentials: "include"
                         })];
@@ -199,7 +213,7 @@ var EventPlanningPage = function () {
 /**
  * Student Name: Siraj Baral
  * Student ID: 100851233
- * Date of Completion: 10/03/2025
+ * Date of Completion: 11/04/2025
  */
 var EventsPage = function () {
     var _a;
@@ -215,7 +229,7 @@ var EventsPage = function () {
             return;
         container.innerHTML = "<p>Loading events...</p>"; // Display loading message
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", SERVER_URL + "/api/events", true);
+        xhr.open("GET", "/api/events", true);
         xhr.onload = function () {
             if (xhr.status === 200) {
                 events = JSON.parse(xhr.responseText); // Update events array
@@ -254,7 +268,7 @@ var EventsPage = function () {
 /**
  * Student Name: Siraj Baral
  * Student ID: 100851233
- * Date of Completion: 10/03/2025
+ * Date of Completion: 11/04/2025
  */
 var GalleryPage = function () {
     var galleryContainer = document.getElementById('gallery');
@@ -348,7 +362,7 @@ var _this = this;
 /**
  * Student Name: Siraj Baral
  * Student ID: 100851233
- * Date of Completion: 10/03/2025
+ * Date of Completion: 11/04/2025
  */
 var LoginPage = function () {
     var form = document.getElementById("loginForm");
@@ -369,7 +383,7 @@ var LoginPage = function () {
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 4, , 5]);
-                    return [4 /*yield*/, fetch(SERVER_URL + "/api/auth/login", {
+                    return [4 /*yield*/, fetch("/api/auth/login", {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify({ email: email, password: password }),
@@ -387,8 +401,8 @@ var LoginPage = function () {
                             form.reset();
                         // Redirect to the home page after 5 seconds
                         setTimeout(function () {
-                            window.location.href = "/";
-                        }, 5000);
+                            window.router.navigate('/');
+                        }, 500);
                     }
                     else {
                         alert(data.message || "Login failed.");
@@ -408,50 +422,46 @@ var _this = this;
 /**
  * Student Name: Siraj Baral
  * Student ID: 100851233
- * Date of Completion: 10/03/2025
+ * Date of Completion: 11/04/2025
  */
 var LogoutPage = function () { return __awaiter(_this, void 0, void 0, function () {
-    var response, data, err_2;
+    var response, err_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 3, , 4]);
-                return [4 /*yield*/, fetch(SERVER_URL + "/api/auth/login", {
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, fetch("/api/auth/logout", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         credentials: "include"
                     })];
             case 1:
                 response = _a.sent();
-                return [4 /*yield*/, response.json()];
-            case 2:
-                data = _a.sent();
                 if (response.ok) {
                     alert("Logout successful!");
                     // Redirect to the home page after 5 seconds
                     setTimeout(function () {
-                        window.location.href = "/";
-                    }, 5000);
+                        window.router.navigate('/');
+                    }, 500);
                 }
                 else {
-                    alert(data.message || "Logout failed.");
+                    alert("Logout failed.");
                 }
-                return [3 /*break*/, 4];
-            case 3:
+                return [3 /*break*/, 3];
+            case 2:
                 err_2 = _a.sent();
                 console.error("Error logging out:", err_2);
                 alert("An error occurred.");
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
-var SERVER_URL = ''; // 'http://localhost:3000'
 function init() {
     return __awaiter(this, void 0, void 0, function () {
         // Fetch events data
         function fetchEvents() {
-            fetch("/data/events.json")
+            fetch("/api/events")
                 .then(function (response) { return response.json(); })
                 .then(function (data) { return (events = data); })
                 .catch(function (error) { return console.error("Error loading events:", error); });
@@ -585,6 +595,23 @@ function init() {
         });
     });
 }
+function logout() {
+    return __awaiter(this, void 0, void 0, function () {
+        var res, data;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, fetch("/api/auth/logout")];
+                case 1:
+                    res = _a.sent();
+                    return [4 /*yield*/, res.json()];
+                case 2:
+                    data = _a.sent();
+                    console.log(data);
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
 var opportunities = [
     {
         title: "Beach Cleanup",
@@ -657,7 +684,7 @@ var _this = this;
 /**
  * Student Name: Siraj Baral
  * Student ID: 100851233
- * Date of Completion: 10/03/2025
+ * Date of Completion: 11/04/2025
  */
 var RegisterPage = function () {
     var form = document.getElementById("registerForm");
@@ -677,7 +704,7 @@ var RegisterPage = function () {
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 4, , 5]);
-                    return [4 /*yield*/, fetch(SERVER_URL + "/api/auth/register", {
+                    return [4 /*yield*/, fetch("/api/auth/register", {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify({ fullname: fullname, email: email, password: password }),
@@ -690,7 +717,7 @@ var RegisterPage = function () {
                     data = _a.sent();
                     if (response.ok) {
                         alert("Registration successful! You can now log in.");
-                        window.location.href = "/login";
+                        window.router.navigate("/login");
                     }
                     else {
                         alert(data.message || "Registration failed.");
@@ -709,7 +736,7 @@ var RegisterPage = function () {
 /**
  * Student Name: Siraj Baral
  * Student ID: 100851233
- * Date of Completion: 10/03/2025
+ * Date of Completion: 11/04/2025
  */
 var contentKeys = {
     '/': 'home.html',
@@ -732,9 +759,13 @@ var Router = /** @class */ (function () {
         this.routes[path] = action;
     };
     Router.prototype.navigate = function (url) {
-        var path = url.startsWith('/') ? url : new URL(url).pathname;
-        history.pushState({}, "", url);
-        this.loadRoute(path);
+        try {
+            var path = url.startsWith('/') ? url : new URL(url).pathname;
+            history.pushState({}, "", url);
+            this.loadRoute(path);
+        }
+        catch (error) {
+        }
     };
     Router.prototype.loadRoute = function (path) {
         return __awaiter(this, void 0, void 0, function () {
@@ -749,6 +780,8 @@ var Router = /** @class */ (function () {
                     case 1:
                         _a.trys.push([1, 4, , 5]);
                         key = contentKeys[path];
+                        if (!key)
+                            throw '';
                         return [4 /*yield*/, fetch('/views/content/' + key)];
                     case 2:
                         res = _a.sent();
@@ -759,6 +792,7 @@ var Router = /** @class */ (function () {
                         return [3 /*break*/, 5];
                     case 4:
                         error_1 = _a.sent();
+                        this.navigate('/');
                         return [3 /*break*/, 5];
                     case 5:
                         this.routes[path]();

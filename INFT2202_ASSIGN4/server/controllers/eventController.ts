@@ -1,3 +1,8 @@
+/**
+ * Student Name: Siraj Baral
+ * Student ID: 100851233
+ * Date of Completion: 11/04/2025
+ */
 import { Request, Response } from "express";
 import Event from "../models/Event";
 

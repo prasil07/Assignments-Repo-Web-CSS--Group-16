@@ -1,7 +1,7 @@
 /**
  * Student Name: Siraj Baral
  * Student ID: 100851233
- * Date of Completion: 10/03/2025
+ * Date of Completion: 11/04/2025
  */
 const EventsPage = () => {
   let events: EventData[] = [];
@@ -17,7 +17,7 @@ const EventsPage = () => {
     container.innerHTML = "<p>Loading events...</p>"; // Display loading message
 
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", SERVER_URL + "/api/events", true);
+    xhr.open("GET", "/api/events", true);
 
     xhr.onload = function () {
       if (xhr.status === 200) {

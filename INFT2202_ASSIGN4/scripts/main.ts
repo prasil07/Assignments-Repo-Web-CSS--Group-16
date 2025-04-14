@@ -1,7 +1,7 @@
 /**
  * Student Name: Siraj Baral
  * Student ID: 100851233
- * Date of Completion: 10/03/2025
+ * Date of Completion: 11/04/2025
  */
 interface EventData {
   id: number;
@@ -24,8 +24,6 @@ interface Opportunity {
 interface Window {
   bootstrap: any;
 }
-
-const SERVER_URL = ''// 'http://localhost:3000'
 
 async function init() {
   for (const key of ['nav', 'footer']) {
@@ -73,7 +71,7 @@ async function init() {
 
   // Fetch events data
   function fetchEvents() {
-    fetch("/data/events.json")
+    fetch("/api/events")
       .then((response) => response.json())
       .then((data) => (events = data))
       .catch((error) => console.error("Error loading events:", error));
@@ -180,4 +178,10 @@ async function init() {
   // Initial Data Fetch
   fetchEvents();
   fetchOpportunities();
+}
+
+async function logout() {
+  const res = await fetch(`/api/auth/logout`);
+  const data = await res.json();
+  console.log(data);
 }
